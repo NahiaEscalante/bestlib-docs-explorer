@@ -7,164 +7,215 @@ import { AlertCircle } from "lucide-react";
 const QuickStart = () => {
   return (
     <DocsLayout>
-      <Breadcrumb items={[{ label: "Getting Started", href: "/getting-started" }, { label: "Quick Start" }]} />
-      
-      <h1 className="text-4xl font-bold mb-6 text-foreground">Quick Start Guide</h1>
-      
+      <Breadcrumb
+        items={[
+          { label: "Getting Started", href: "/getting-started" },
+          { label: "Quick Start" },
+        ]}
+      />
+
+      <h1 className="text-4xl font-bold mb-6 text-foreground">
+        Quick Start Guide
+      </h1>
+
       <p className="text-lg text-muted-foreground mb-8">
-        Get up and running with BESTLIB in minutes. This guide will walk you through installation
-        and creating your first visualization.
+        Learn the essentials of BESTLIB: installation, generating your first
+        visualization, and building an ASCII-based dashboard powered by
+        D3.js and Python specifications.
       </p>
 
-      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-8">Installation</h2>
-      
-      <p className="text-foreground mb-4">
-        Install BESTLIB using pip:
-      </p>
-
-      <CodeBlock
-        code="pip install bestlib"
-        language="bash"
-      />
+      {/* INSTALLATION */}
+      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-10">
+        Installation
+      </h2>
 
       <p className="text-foreground mb-4">
-        For development installations with additional dependencies:
+        Install BESTLIB directly from pip:
       </p>
 
-      <CodeBlock
-        code="pip install bestlib[dev]"
-        language="bash"
-      />
-
-      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-12">Your First Visualization</h2>
-      
-      <p className="text-foreground mb-4">
-        Create a simple scatter plot with interactive features:
-      </p>
-
-      <CodeBlock
-        code={`import bestlib as bl
-import pandas as pd
-
-# Load sample data
-data = pd.read_csv('iris.csv')
-
-# Create a scatter plot
-scatter = bl.ScatterPlot(
-    data=data,
-    x='sepal_length',
-    y='sepal_width',
-    color='species'
-)
-
-# Display the chart
-scatter.show()`}
-        filename="simple_scatter.py"
-      />
+      <CodeBlock code="pip install pybestlib==0.1.0" language="bash" />
 
       <Card className="my-6 p-4 border-l-4 border-l-primary">
         <div className="flex gap-3">
-          <AlertCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+          <AlertCircle className="h-5 w-5 text-primary mt-0.5" />
           <div>
-            <p className="font-semibold text-foreground mb-1">Interactive by Default</p>
+            <p className="font-semibold text-foreground mb-1">Environment Support</p>
             <p className="text-sm text-muted-foreground">
-              All BESTLIB charts are interactive by default. You can pan, zoom, and select data points
-              without any additional configuration.
+              BESTLIB is compatible with Jupyter Notebook, JupyterLab and Google Colab,
+              using the Jupyter Comm Protocol for JS ↔ Python communication.
             </p>
           </div>
         </div>
       </Card>
 
-      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-12">Creating a Multi-Chart Layout</h2>
-      
+      {/* FIRST VISUALIZATION */}
+      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-14">
+        Your First Visualization
+      </h2>
+
       <p className="text-foreground mb-4">
-        BESTLIB's MatrixLayout makes it easy to create complex dashboards with multiple linked visualizations:
+        BESTLIB uses ASCII layouts and wrapper functions from the legacy API for simplicity.
+        Here's how to create a basic BarChart:
       </p>
 
       <CodeBlock
-        code={`import bestlib as bl
-import pandas as pd
+        code={`import pandas as pd
+from BESTLIB.layouts.matrix import MatrixLayout
 
-# Load data
-data = pd.read_csv('iris.csv')
+df = pd.DataFrame({
+    'category': ['A', 'B', 'C'],
+    'value': [10, 20, 15]
+})
 
-# Create a 2x2 layout
-layout = bl.MatrixLayout(rows=2, cols=2)
+layout = MatrixLayout("A")
 
-# Create multiple charts
-scatter = bl.ScatterPlot(data, x='sepal_length', y='sepal_width', color='species')
-histogram = bl.Histogram(data, x='petal_length', bins=20)
-radviz = bl.Radviz(data, features=['sepal_length', 'sepal_width', 'petal_length'], color='species')
-parallel = bl.ParallelCoordinates(data, dimensions=['sepal_length', 'sepal_width', 'petal_length'])
+layout.map_barchart(
+    'A',
+    df,
+    category_col='category',
+    value_col='value',
+    xLabel='Category',
+    yLabel='Value'
+)
 
-# Add charts to layout
-layout.add_chart(scatter, row=0, col=0)
-layout.add_chart(histogram, row=0, col=1)
-layout.add_chart(radviz, row=1, col=0)
-layout.add_chart(parallel, row=1, col=1)
-
-# Display the layout
-layout.show()`}
-        filename="multi_chart_layout.py"
+layout.display()`}
+        filename="first_visualization.py"
       />
 
-      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-12">Enabling Reactive Linking</h2>
-      
+      <Card className="my-6 p-4 border-l-4 border-l-primary">
+        <div className="flex gap-3">
+          <AlertCircle className="h-5 w-5 text-primary mt-0.5" />
+          <div>
+            <p className="font-semibold text-foreground mb-1">
+              Behind the Scenes
+            </p>
+            <p className="text-sm text-muted-foreground">
+              BESTLIB converts your DataFrame into dictionaries, validates input,
+              generates a D3.js specification, injects HTML, and renders automatically.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      {/* MATRIX LAYOUT */}
+      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-14">
+        Building an ASCII Dashboard
+      </h2>
+
       <p className="text-foreground mb-4">
-        One of BESTLIB's most powerful features is reactive linking between charts. When you select
-        data in one chart, the selection automatically propagates to all linked charts:
+        MatrixLayout lets you define dashboards entirely using ASCII text.
+        Each letter corresponds to a view that can contain a chart:
       </p>
 
       <CodeBlock
-        code={`import bestlib as bl
-import pandas as pd
+        code={`import pandas as pd
+from BESTLIB.layouts.matrix import MatrixLayout
 
-# Load data
-data = pd.read_csv('iris.csv')
+df = pd.read_csv('iris.csv')
 
-# Create a reactive layout
-layout = bl.ReactiveMatrixLayout(rows=2, cols=2)
+layout = MatrixLayout(\"""
+AB
+CD
+\""")
 
-# Create charts
-scatter = bl.ScatterPlot(data, x='sepal_length', y='sepal_width')
-histogram = bl.Histogram(data, x='petal_length')
+layout.map_scatter('A', df, x_col='sepal_length', y_col='sepal_width')
+layout.map_histogram('B', df, col='petal_length', bins=20)
+layout.map_radviz('C', df, features=['sepal_length','sepal_width','petal_length'])
+layout.map_parallel('D', df, dimensions=['sepal_length','sepal_width','petal_length'])
 
-# Add charts
-layout.add_chart(scatter, row=0, col=0)
-layout.add_chart(histogram, row=0, col=1)
+layout.display()`}
+        filename="ascii_dashboard.py"
+      />
 
-# Enable reactive linking
-layout.enable_linking()
+      <Card className="my-6 p-4 border-l-4 border-l-primary">
+        <div className="flex gap-3">
+          <AlertCircle className="h-5 w-5 text-primary mt-0.5" />
+          <div>
+            <p className="font-semibold text-foreground mb-1">
+              ASCII Layout Engine
+            </p>
+            <p className="text-sm text-muted-foreground">
+              The LayoutEngine parses layouts like "AB\\nCD", converts them to grid
+              structures, validates block groups and prepares the dashboard for rendering.
+            </p>
+          </div>
+        </div>
+      </Card>
 
-# Now selections in one chart will highlight in all others!
-layout.show()`}
+      {/* REACTIVE LINKING */}
+      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-14">
+        Enabling Reactive Linking
+      </h2>
+
+      <p className="text-foreground mb-4">
+        BESTLIB’s reactive engine synchronizes selections across linked views.
+        ReactiveMatrixLayout activates SelectionModel + ReactiveEngine automatically.
+      </p>
+
+      <CodeBlock
+        code={`import pandas as pd
+from BESTLIB.layouts.reactive import ReactiveMatrixLayout
+
+df = pd.read_csv('iris.csv')
+
+layout = ReactiveMatrixLayout(\"AB\")
+
+layout.map_scatter('A', df, x_col='sepal_length', y_col='sepal_width')
+layout.map_histogram('B', df, col='sepal_length')
+
+layout.display()  # Selections now sync automatically`}
         filename="reactive_linking.py"
       />
 
       <Card className="my-6 p-4 border-l-4 border-l-primary">
         <div className="flex gap-3">
-          <AlertCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+          <AlertCircle className="h-5 w-5 text-primary mt-0.5" />
           <div>
-            <p className="font-semibold text-foreground mb-1">Automatic Synchronization</p>
+            <p className="font-semibold text-foreground mb-1">
+              How It Works
+            </p>
             <p className="text-sm text-muted-foreground">
-              ReactiveMatrixLayout automatically manages data synchronization between charts.
-              No manual event handling required!
+              Selection events are captured in JavaScript, sent through the CommManager
+              to Python, processed by the ReactiveEngine, and rendered back into the dashboard.
             </p>
           </div>
         </div>
       </Card>
 
-      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-12">Next Steps</h2>
-      
-      <p className="text-foreground mb-4">
-        Now that you've created your first BESTLIB visualizations, explore these resources:
+      {/* NEXT STEPS */}
+      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-14">
+        Next Steps
+      </h2>
+
+      <p className="text-foreground mb-3">
+        Explore more of BESTLIB’s capabilities:
       </p>
 
-      <ul className="space-y-2 text-foreground list-disc list-inside mb-8">
-        <li><a href="/tutorials" className="text-primary hover:underline">Browse Tutorials</a> - Learn advanced techniques</li>
-        <li><a href="/examples" className="text-primary hover:underline">View Examples</a> - See complete working examples</li>
-        <li><a href="/api" className="text-primary hover:underline">API Reference</a> - Detailed API documentation</li>
-        <li><a href="/deployment" className="text-primary hover:underline">Deployment Guide</a> - Deploy your visualizations</li>
+      <ul className="space-y-2 text-foreground list-disc list-inside mb-10">
+        <li>
+          <a href="/charts" className="text-primary hover:underline">
+            Chart Catalog
+          </a>{" "}
+          — 30+ interactive chart types.
+        </li>
+        <li>
+          <a href="/layouts" className="text-primary hover:underline">
+            Layout System
+          </a>{" "}
+          — full ASCII layout features.
+        </li>
+        <li>
+          <a href="/reactive" className="text-primary hover:underline">
+            Reactive Engine
+          </a>{" "}
+          — linking, propagation & SelectionModel.
+        </li>
+        <li>
+          <a href="/api" className="text-primary hover:underline">
+            API Reference
+          </a>{" "}
+          — all classes, modules & methods.
+        </li>
       </ul>
     </DocsLayout>
   );

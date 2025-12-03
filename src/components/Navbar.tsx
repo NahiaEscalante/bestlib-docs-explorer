@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
 import { Search, Github, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import bestlibLogo from "@/assets/bestlib-logo.png";
+import bestlibLogo from "@/assets/bestlib_logo.png";
 
 const navItems = [
   { label: "Plot Types", href: "/plot-types" },
-  { label: "User Guide", href: "/user-guide" },
-  { label: "Tutorials", href: "/tutorials" },
   { label: "Examples", href: "/examples" },
-  { label: "API Reference", href: "/api" },
-  { label: "Contribute", href: "/contribute" },
-  { label: "Releases", href: "/releases" },
+  { label: "API Reference", href: "/api/python" },
 ];
 
 export const Navbar = () => {
@@ -19,8 +15,7 @@ export const Navbar = () => {
       <nav className="flex h-14 items-center justify-between px-6">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <img src={bestlibLogo} alt="BESTLIB" className="h-8 w-8" />
-            <span className="text-lg font-semibold text-foreground tracking-tight">BESTLIB</span>
+            <img src={bestlibLogo} alt="BESTLIB" className="h-20 w-32" />
           </Link>
           
           <div className="hidden lg:flex items-center gap-6">

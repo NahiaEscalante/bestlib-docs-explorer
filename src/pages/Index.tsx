@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Zap, Package } from "lucide-react";
-import bestlibLogo from "@/assets/bestlib-logo.png";
-
+import bestlibLogo from "@/assets/bestlib_logo.png";
+import { DocsLayout } from "@/components/DocsLayout";
 const Index = () => {
   return (
+    <DocsLayout>
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-border">
         <div className="container mx-auto px-6 py-24 text-center">
-          <img src={bestlibLogo} alt="BESTLIB" className="h-24 w-24 mx-auto mb-6" />
+          <img src={bestlibLogo} alt="BESTLIB" className="h-48 w-80 mx-auto mb-6" />
           <h1 className="text-5xl font-bold mb-6 text-foreground">
             BESTLIB Documentation
           </h1>
@@ -136,11 +137,16 @@ layout.show()`}</code>
               <a href="/about" className="text-muted-foreground hover:text-primary transition-colors">
                 About
               </a>
+              
             </div>
           </div>
+          
         </div>
+        
       </footer>
     </div>
+    </DocsLayout>
+
   );
 };
 

@@ -5,12 +5,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import QuickStart from "./pages/QuickStart";
-import TutorialsReactiveLinking from "./pages/TutorialsReactiveLinking";
 import Deployment from "./pages/Deployment";
 import ApiPython from "./pages/ApiPython";
 import NotFound from "./pages/NotFound";
+import CoreConcepts from "./pages/CoreConcepts";
+import ReactiveLinking from "./pages/ReactiveLinking";
+import ReactiveMatrixLayout from "./pages/ReactiveMatrixLayout";
+import ApiJavaScript from "./pages/ApiJavascript";
+import ApiDataModels from "./pages/ApiDataModels";
+import ChartsIndex from "./pages/ChartsIndex";
+import LinkedViews from "./pages/LinkedViews";
+import InteractiveScatter from "./pages/IteractiveScatter";
 
 const queryClient = new QueryClient();
+
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -21,9 +29,16 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/quick-start" element={<QuickStart />} />
-          <Route path="/tutorials/reactive-linking" element={<TutorialsReactiveLinking />} />
+           <Route path="/core-concepts" element={<CoreConcepts/>} />
+           <Route path="/layouts/reactive" element={<ReactiveMatrixLayout/>} />
+          <Route path="/layouts/reactive-linking" element={<ReactiveLinking/>} />
+          <Route path="/api/javascript" element={<ApiJavaScript/>} />
+          <Route path="/api/models" element={<ApiDataModels/>} />
           <Route path="/deployment" element={<Deployment />} />
           <Route path="/api/python" element={<ApiPython />} />
+           <Route path="/charts/index" element={<ChartsIndex/>} />
+            <Route path="/examples/scatter" element={<InteractiveScatter/>} />
+             <Route path="/examples/linked" element={<LinkedViews/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -13,35 +13,34 @@ const sidebarSections: SidebarSection[] = [
     title: "Getting Started",
     items: [
       { label: "Quick Start", href: "/quick-start" },
-      { label: "Installation", href: "/installation" },
       { label: "Core Concepts", href: "/core-concepts" },
     ],
   },
   {
     title: "Layouts",
     items: [
-      { label: "MatrixLayout", href: "/layouts/matrix" },
       { label: "ReactiveMatrixLayout", href: "/layouts/reactive" },
-      { label: "Reactive Linking", href: "/tutorials/reactive-linking" },
+      { label: "Reactive Linking", href: "/layouts/reactive-linking" },
     ],
   },
   {
     title: "Charts",
     items: [
+      { label: "Index", href: "/charts/index" },
       { label: "Scatter Plot", href: "/charts/scatter" },
       { label: "Histogram", href: "/charts/histogram" },
       { label: "Radviz", href: "/charts/radviz" },
       { label: "Parallel Coordinates", href: "/charts/parallel" },
     ],
   },
-  {
-    title: "User Interface",
+   {
+    title: "Examples",
     items: [
-      { label: "Event System", href: "/ui/events" },
-      { label: "Selection Models", href: "/ui/selection" },
-      { label: "Interactivity", href: "/ui/interactivity" },
+      { label: "Interactive Scatter", href: "/examples/scatter" },
+      { label: "Linked Charts", href: "/examples/linked" },
     ],
   },
+  
   {
     title: "API Reference",
     items: [
@@ -50,29 +49,8 @@ const sidebarSections: SidebarSection[] = [
       { label: "Data Models", href: "/api/models" },
     ],
   },
-  {
-    title: "Deployment",
-    items: [
-      { label: "Installation Guide", href: "/deployment" },
-      { label: "Jupyter Integration", href: "/deployment/jupyter" },
-      { label: "Web Frameworks", href: "/deployment/web" },
-    ],
-  },
-  {
-    title: "Examples",
-    items: [
-      { label: "Interactive Scatter", href: "/examples/scatter" },
-      { label: "Linked Charts", href: "/examples/linked" },
-      { label: "Multi-Panel Layout", href: "/examples/multi-panel" },
-    ],
-  },
-  {
-    title: "Help",
-    items: [
-      { label: "FAQ", href: "/faq" },
-      { label: "Troubleshooting", href: "/troubleshooting" },
-    ],
-  },
+
+ 
 ];
 
 export const DocsSidebar = () => {
