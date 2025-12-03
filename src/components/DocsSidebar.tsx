@@ -40,12 +40,11 @@ const sidebarSections: SidebarSection[] = [
       { label: "Linked Charts", href: "/examples/linked" },
     ],
   },
-  
+
   {
     title: "API Reference",
     items: [
       { label: "Python API", href: "/api/python" },
-      { label: "JavaScript API", href: "/api/javascript" },
       { label: "Data Models", href: "/api/models" },
     ],
   },
