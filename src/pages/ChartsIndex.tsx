@@ -32,7 +32,7 @@ export default function ChartsIndex() {
             <img
               src={chart.img}
               alt={chart.name}
-              className="w-full h-32 object-contain mb-4 opacity-90"
+              className="w-full h-56 object-contain mb-4 opacity-90"
             />
             <h3 className="text-center text-foreground text-lg font-medium">
               {chart.name}
