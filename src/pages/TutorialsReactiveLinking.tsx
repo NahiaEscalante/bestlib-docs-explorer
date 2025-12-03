@@ -266,12 +266,6 @@ layout.show()`}
             Back to Tutorials
           </Button>
         </Link>
-        <Link to="/examples/linked">
-          <Button variant="outline" className="gap-2">
-            View Examples
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
       </div>
     </DocsLayout>
   );

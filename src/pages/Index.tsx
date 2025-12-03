@@ -25,11 +25,7 @@ const Index = () => {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/examples">
-              <Button size="lg" variant="outline">
-                View Examples
-              </Button>
-            </Link>
+
           </div>
         </div>
       </section>

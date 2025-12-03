@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import bestlibLogo from "@/assets/bestlib_logo.png";
 
 const navItems = [
-  { label: "Plot Types", href: "/plot-types" },
-  { label: "Examples", href: "/examples" },
-  { label: "API Reference", href: "/api/python" },
+  { label: "Charts", href: "/charts/index" },
+  { label: "API Reference", href: "/api/python" }
 ];
 
 export const Navbar = () => {
@@ -31,17 +30,6 @@ export const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="h-9 w-9">
-            <Search className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="icon" className="h-9 w-9">
-            <Moon className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="icon" className="h-9 w-9">
-            <Github className="h-4 w-4" />
-          </Button>
-        </div>
       </nav>
     </header>
   );
