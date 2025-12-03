@@ -29,8 +29,8 @@ const sidebarSections: SidebarSection[] = [
       { label: "Index", href: "/charts/index" },
       { label: "Scatter Plot", href: "/charts/scatter" },
       { label: "Histogram", href: "/charts/histogram" },
-      { label: "Radviz", href: "/charts/radviz" },
-      { label: "Parallel Coordinates", href: "/charts/parallel" },
+      { label: "Bar Chart", href: "/charts/bar" },  
+      { label: "Boxplot", href: "/charts/boxplot" },
     ],
   },
    {

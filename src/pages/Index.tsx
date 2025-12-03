@@ -131,12 +131,12 @@ layout.show()`}</code>
               © 2025 BESTLIB Documentation v1.0.0
             </div>
             <div className="flex items-center gap-6 text-sm">
-              <a href="/license" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/license" className="text-muted-foreground hover:text-primary transition-colors">
                 MIT License
-              </a>
-              <a href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
                 About
-              </a>
+              </Link>
               
             </div>
           </div>

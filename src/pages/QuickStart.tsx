@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { CodeBlock } from "@/components/CodeBlock";
 import { Card } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const QuickStart = () => {
   return (
@@ -193,27 +194,27 @@ layout.display()  # Selections now sync automatically`}
 
       <ul className="space-y-2 text-foreground list-disc list-inside mb-10">
         <li>
-          <a href="/charts" className="text-primary hover:underline">
+          <Link to="/charts/index" className="text-primary hover:underline">
             Chart Catalog
-          </a>{" "}
+          </Link>{" "}
           — 30+ interactive chart types.
         </li>
         <li>
-          <a href="/layouts" className="text-primary hover:underline">
+          <Link to="/layouts/reactive" className="text-primary hover:underline">
             Layout System
-          </a>{" "}
+          </Link>{" "}
           — full ASCII layout features.
         </li>
         <li>
-          <a href="/reactive" className="text-primary hover:underline">
+          <Link to="/layouts/reactive-linking" className="text-primary hover:underline">
             Reactive Engine
-          </a>{" "}
+          </Link>{" "}
           — linking, propagation & SelectionModel.
         </li>
         <li>
-          <a href="/api" className="text-primary hover:underline">
+          <Link to="/api/python" className="text-primary hover:underline">
             API Reference
-          </a>{" "}
+          </Link>{" "}
           — all classes, modules & methods.
         </li>
       </ul>

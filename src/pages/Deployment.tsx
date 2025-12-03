@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { CodeBlock } from "@/components/CodeBlock";
 import { Card } from "@/components/ui/card";
 import { AlertCircle, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Deployment = () => {
   return (
@@ -364,7 +365,7 @@ pip install --upgrade bestlib  # Reinstall if needed"
       </div>
 
       <p className="text-foreground mt-8">
-        For more troubleshooting help, see the <a href="/troubleshooting" className="text-primary hover:underline">Troubleshooting Guide</a>.
+        For more troubleshooting help, see the <Link to="/troubleshooting" className="text-primary hover:underline">Troubleshooting Guide</Link>.
       </p>
     </DocsLayout>
   );

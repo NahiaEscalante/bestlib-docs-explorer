@@ -1,5 +1,6 @@
 import { DocsLayout } from "@/components/DocsLayout";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { Link } from "react-router-dom";
 import scatterImg from "@/assets/scatter.png";
 import barchartImg from "@/assets/barchart.png";
 import histogramImg from "@/assets/histogram.png";
@@ -24,9 +25,9 @@ export default function ChartsIndex() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {charts.map((chart) => (
-          <a
+          <Link
             key={chart.name}
-            href={chart.href}
+            to={chart.href}
             className="rounded-xl border border-neutral-700 bg-neutral-900 hover:bg-neutral-800 transition cursor-pointer p-4 block"
           >
             <img
@@ -37,7 +38,7 @@ export default function ChartsIndex() {
             <h3 className="text-center text-foreground text-lg font-medium">
               {chart.name}
             </h3>
-          </a>
+          </Link>
         ))}
       </div>
     </DocsLayout>
