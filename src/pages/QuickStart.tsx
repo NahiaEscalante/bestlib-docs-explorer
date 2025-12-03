@@ -33,7 +33,7 @@ const QuickStart = () => {
         Install BESTLIB directly from pip:
       </p>
 
-      <CodeBlock code="pip install pybestlib==0.1.0" language="bash" />
+      <CodeBlock code="!pip install pybestlib" language="bash" />
 
       <Card className="my-6 p-4 border-l-4 border-l-primary">
         <div className="flex gap-3">

@@ -44,7 +44,7 @@ const sidebarSections: SidebarSection[] = [
   {
     title: "API Reference",
     items: [
-      { label: "Python API", href: "/api/python" },
+      { label: "APIs", href: "/api/python" },
       { label: "Data Models", href: "/api/models" },
     ],
   },

@@ -1,54 +1,27 @@
 import { DocsLayout } from "@/components/DocsLayout";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import scatterImg from "@/assets/scatter.png";
+import barchartImg from "@/assets/barchart.png";
+import histogramImg from "@/assets/histogram.png";
+import boxplotImg from "@/assets/boxplot.png";
 
 const charts = [
-  {
-    name: "Scatter Plot",
-    href: "/charts/scatter",
-    img: "/gallery-icons/scatter.svg",
-  },
-  {
-    name: "Histogram",
-    href: "/charts/histogram",
-    img: "/gallery-icons/histogram.svg",
-  },
-  {
-    name: "Bar Chart",
-    href: "/charts/bar",
-    img: "/gallery-icons/bar.svg",
-  },
-  {
-    name: "Boxplot",
-    href: "/charts/boxplot",
-    img: "/gallery-icons/boxplot.svg",
-  },
-  {
-    name: "Radviz",
-    href: "/charts/radviz",
-    img: "/gallery-icons/radviz.svg",
-  },
-  {
-    name: "Parallel Coordinates",
-    href: "/charts/parallel-coordinates",
-    img: "/gallery-icons/parallel.svg",
-  },
+  { name: "Scatter Plot", href: "/charts/scatter", img: scatterImg },
+  { name: "Bar Chart", href: "/charts/bar", img: barchartImg },
+  { name: "Histogram", href: "/charts/histogram", img: histogramImg },
+  { name: "Boxplot", href: "/charts/boxplot", img: boxplotImg },
 ];
 
 export default function ChartsIndex() {
   return (
     <DocsLayout>
-      <Breadcrumb
-        items={[
-          { label: "Charts", href: "/charts" },
-        ]}
-      />
+      <Breadcrumb items={[{ label: "Charts", href: "/charts" }]} />
 
       <h1 className="text-4xl font-bold mb-4 text-foreground">Charts</h1>
       <p className="text-lg text-muted-foreground mb-8">
         Explore all chart types supported by BESTLIB. Each visualization is fully interactive and compatible with MatrixLayout and ReactiveMatrixLayout.
       </p>
 
-      {/* Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {charts.map((chart) => (
           <a

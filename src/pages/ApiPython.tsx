@@ -10,7 +10,7 @@ const ApiPython = () => {
       <Breadcrumb
         items={[
           { label: "API", href: "/api" },
-          { label: "Python API" },
+          { label: "APIs" },
         ]}
       />
 
@@ -19,51 +19,32 @@ const ApiPython = () => {
       </h1>
 
       <p className="text-lg text-muted-foreground mb-8">
-        The Python API is the entry point to BESTLIB. It provides lightweight
-        layout classes, chart mapping functions, validation utilities, and
-        the reactive engine for linked views.
+        La API de Python es el núcleo de BESTLIB. Desde aquí se procesan datos,
+        se generan especificaciones para D3.js, se interpretan layouts ASCII,
+        se coordinan vistas enlazadas y se maneja la comunicación reactiva con
+        JavaScript dentro de Jupyter.
       </p>
 
-      {/* SECTION: LAYOUTS */}
+      {/* LAYOUTS */}
       <h2 className="text-2xl font-semibold mb-4 text-foreground mt-12">
-        Layouts
+        Layout (ReactiveMatrixLayout)
       </h2>
 
       <p className="text-foreground mb-4">
-        BESTLIB defines two main layout classes:
+        BESTLIB utiliza layouts ASCII para definir dashboards. Cada letra es una
+        celda que luego se mapea a un gráfico. El motor de layouts incluye:
       </p>
 
       <ul className="list-disc list-inside space-y-2 mb-4 text-foreground">
-        <li><strong>MatrixLayout</strong> — static ASCII dashboards</li>
-        <li><strong>ReactiveMatrixLayout</strong> — dashboards with linked interactions</li>
+        <li><strong>ReactiveMatrixLayout</strong> — sincroniza selecciones entre vistas mediante ReactiveEngine</li>
       </ul>
-
-      <h3 className="text-xl font-semibold mt-8 mb-3 text-foreground">
-        MatrixLayout
-      </h3>
-
-      <CodeBlock
-        code={`from BESTLIB.layouts.matrix import MatrixLayout
-
-layout = MatrixLayout(\"""
-AB
-AC
-\""")`}
-        language="python"
-        filename="matrix_layout.py"
-      />
-
-      <p className="text-muted-foreground mt-3 mb-6">
-        MatrixLayout parses ASCII text to create dashboard grids. Each unique 
-        letter maps to a single chart block.
-      </p>
 
       <h3 className="text-xl font-semibold mt-8 mb-3 text-foreground">
         ReactiveMatrixLayout
       </h3>
 
       <CodeBlock
-        code={`from BESTLIB.layouts.reactive import ReactiveMatrixLayout
+        code={`from BESTLIB.layouts import ReactiveMatrixLayout
 
 reactive = ReactiveMatrixLayout("AB")`}
         language="python"
@@ -75,53 +56,33 @@ reactive = ReactiveMatrixLayout("AB")`}
           <AlertCircle className="h-5 w-5 text-primary mt-1" />
           <div>
             <p className="font-semibold text-foreground mb-1">
-              Built-in Reactivity
+              Sistema Reactivo
             </p>
             <p className="text-sm text-muted-foreground">
-              ReactiveMatrixLayout automatically wires SelectionModel and 
-              ReactiveEngine to synchronize selections between charts.
+              Este layout crea un <code>SelectionModel</code> por instancia, usa 
+              <code>ReactiveEngine</code> para propagar selecciones y <code>LinkManager</code> para
+              mantener sincronizadas las vistas conectadas.
             </p>
           </div>
         </div>
       </Card>
 
-      {/* SECTION: CHART MAPPING */}
+     
+
+      {/* CHARTBASE */}
       <h2 className="text-2xl font-semibold mb-4 text-foreground mt-16">
-        Mapping Charts to Layouts
+        Sistema de Gráficos (ChartBase)
       </h2>
 
       <p className="text-foreground mb-4">
-        BESTLIB provides wrapper methods to attach charts using a letter 
-        identifier from the ASCII layout.
-      </p>
-
-      <CodeBlock
-        code={`layout.map_scatter("A", df, x_col="x", y_col="y")
-layout.map_histogram("B", df, col="value")
-layout.map_barchart("C", df, category_col="type", value_col="count")`}
-        language="python"
-        filename="mapping_charts.py"
-      />
-
-      <p className="text-muted-foreground mt-3 mb-8">
-        These wrappers construct the proper Chart classes internally and attach 
-        them to the layout.
-      </p>
-
-      {/* SECTION: CHART BASE CLASS */}
-      <h2 className="text-2xl font-semibold mb-4 text-foreground mt-16">
-        ChartBase (for advanced users)
-      </h2>
-
-      <p className="text-foreground mb-4">
-        All charts inherit from <code>ChartBase</code>. This class handles:
+        Todos los gráficos heredan de <code>ChartBase</code>. Cada clase de gráfico define:
       </p>
 
       <ul className="list-disc list-inside space-y-2 mb-6 text-foreground">
-        <li>data validation</li>
-        <li>data preparation (df → records)</li>
-        <li>specification building</li>
-        <li>chart metadata</li>
+        <li>validación de columnas y tipos</li>
+        <li>preparación de datos (DataFrame → dicts)</li>
+        <li>generación de especificación D3.js</li>
+        <li>nombre del renderizador JS (p. ej. <code>renderScatter</code>)</li>
       </ul>
 
       <CodeBlock
@@ -129,10 +90,12 @@ layout.map_barchart("C", df, category_col="type", value_col="count")`}
     chart_type = None
 
     def validate_data(self, data, **options):
-        raise NotImplementedError
+        # validadores del módulo data.validators
+        ...
 
     def prepare_data(self, data, **options):
-        raise NotImplementedError
+        # normalización y transformación de pandas → dicts
+        ...
 
     def get_spec(self):
         return {
@@ -144,22 +107,22 @@ layout.map_barchart("C", df, category_col="type", value_col="count")`}
         filename="chart_base.py"
       />
 
-      {/* SECTION: DATA PIPELINE */}
+      {/* DATA PIPELINE */}
       <h2 className="text-2xl font-semibold mb-4 text-foreground mt-16">
-        Data Validation & Preparation
+        Pipeline de Datos
       </h2>
 
       <p className="text-foreground mb-4">
-        BESTLIB uses separate modules to validate and normalize incoming 
-        DataFrames before passing them to the renderer.
+        El módulo <strong>data/</strong> ejecuta validación, preparación y normalización antes de
+        que los datos lleguen al renderizador.
       </p>
 
       <CodeBlock
         code={`from BESTLIB.data.validators import validate_scatter_data
 from BESTLIB.data.preparators import prepare_scatter_data
 
-validate_scatter_data(df, x_col="a", y_col="b")
-records = prepare_scatter_data(df, x_col="a", y_col="b")`}
+validate_scatter_data(df, x_col="x", y_col="y")
+records = prepare_scatter_data(df, x_col="x", y_col="y")`}
         language="python"
         filename="validation_pipeline.py"
       />
@@ -169,23 +132,24 @@ records = prepare_scatter_data(df, x_col="a", y_col="b")`}
           <AlertCircle className="h-5 w-5 text-primary mt-1" />
           <div>
             <p className="font-semibold text-foreground mb-1">
-              Consistency Guaranteed
+              Pipeline Unificado
             </p>
             <p className="text-sm text-muted-foreground">
-              All charts depend on the same validation + preparation 
-              pipeline, ensuring predictable behavior.
+              Todos los gráficos usan el mismo sistema: validadores ➝ preparadores ➝ normalización.
+              Así garantizamos consistencia en todo el dashboard.
             </p>
           </div>
         </div>
       </Card>
 
+      {/* DISPLAY */}
       <h2 className="text-2xl font-semibold mb-4 text-foreground mt-16">
-        Rendering Dashboards
+        Renderizado del Dashboard
       </h2>
 
       <p className="text-foreground mb-4">
-        Use <code>.display()</code> to generate the dashboard cell with inline 
-        HTML, JS assets, and chart specs.
+        El método <code>.display()</code> genera HTML, inyecta D3.js, assets y construye
+        el bundle JS con las especificaciones de cada gráfico.
       </p>
 
       <CodeBlock
@@ -195,24 +159,26 @@ records = prepare_scatter_data(df, x_col="a", y_col="b")`}
       />
 
       <p className="text-muted-foreground mt-3 mb-6">
-        Rendering is done entirely in the browser via D3.js using the 
-        generated specifications.
+        Internamente se usan <code>HTMLGenerator</code>, <code>JSBuilder</code> y <code>AssetManager</code>.
       </p>
 
-      {/* SECTION: EVENTS */}
+      {/* EVENTS */}
       <h2 className="text-2xl font-semibold mb-4 text-foreground mt-16">
-        Interactive Events (JS → Python)
+        Eventos Interactivos (JS → Python)
       </h2>
 
       <p className="text-foreground mb-4">
-        BESTLIB sends selection, hover, click and brush events through the 
-        Jupyter Comm protocol:
+        BESTLIB transmite selecciones, brushes, clics y hover mediante el Jupyter
+        Comm Protocol, permitiendo reactividad y sincronización entre vistas.
       </p>
 
       <CodeBlock
         code={`{
   "type": "select",
-  "payload": { "items": [1, 2, 3], "__view_letter__": "A" },
+  "payload": { 
+    "items": [1, 5, 9], 
+    "__view_letter__": "A" 
+  },
   "div_id": "matrix-12345"
 }`}
         language="json"
@@ -220,8 +186,8 @@ records = prepare_scatter_data(df, x_col="a", y_col="b")`}
       />
 
       <p className="text-muted-foreground mt-4 mb-16">
-        ReactiveMatrixLayout listens for these events and updates linked views
-        automatically.
+        <code>CommManager</code> recibe el mensaje, <code>EventManager</code> lo propaga y 
+        <code>ReactiveEngine</code> actualiza las vistas enlazadas sin re-ejecutar la celda.
       </p>
     </DocsLayout>
   );

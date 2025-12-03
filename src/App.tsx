@@ -13,6 +13,10 @@ import ReactiveLinking from "./pages/ReactiveLinking";
 import ReactiveMatrixLayout from "./pages/ReactiveMatrixLayout";
 import ApiDataModels from "./pages/ApiDataModels";
 import ChartsIndex from "./pages/ChartsIndex";
+import ScatterPlot from "./pages/ScatterPlot";
+import BarChart from "./pages/BarChart";
+import Histogram from "./pages/Histogram";
+import BoxPlot from "./pages/BoxPlot";
 import LinkedViews from "./pages/LinkedViews";
 import InteractiveScatter from "./pages/IteractiveScatter";
 
@@ -35,6 +39,10 @@ const App = () => (
           <Route path="/deployment" element={<Deployment />} />
           <Route path="/api/python" element={<ApiPython />} />
            <Route path="/charts/index" element={<ChartsIndex/>} />
+           <Route path="/charts/scatter" element={<ScatterPlot/>} />
+           <Route path="/charts/bar" element={<BarChart/>} />
+           <Route path="/charts/histogram" element={<Histogram/>} />
+           <Route path="/charts/boxplot" element={<BoxPlot/>} />
             <Route path="/examples/scatter" element={<InteractiveScatter/>} />
              <Route path="/examples/linked" element={<LinkedViews/>} />
           <Route path="*" element={<NotFound />} />
